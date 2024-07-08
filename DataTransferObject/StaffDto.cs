@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using WMSBackend.Models;
+﻿using WMSBackend.Models;
 
 namespace WMSBackend.DataTransferObject
 {
-    public class CustomerDto
+    public class StaffDto
     {
         public string FirstName { get; set; } = string.Empty;
 
@@ -12,7 +11,5 @@ namespace WMSBackend.DataTransferObject
         public string UserName { get; set; }
 
         public string Email { get; set; }
-
-        public string Address { get; set; }
     }
 }

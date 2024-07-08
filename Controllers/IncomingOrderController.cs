@@ -50,7 +50,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetIncomingOrder/{id}")]
+        [Route("GetIncomingOrder")]
         public async Task<ActionResult<IncomingOrder>> GetIncomingOrder(int id, bool isGetRelations)
         {
             var foundIncomingOrder = await _unitOfWork.IncomingOrderRepository.GetAsync(

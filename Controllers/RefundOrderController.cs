@@ -48,7 +48,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetRefundOrder/{id}")]
+        [Route("GetRefundOrder")]
         public async Task<ActionResult<RefundOrder>> GetRefundOrder(int id, bool isGetRelations)
         {
             var foundRefundOrder = await _unitOfWork.RefundOrderRepository.GetAsync(

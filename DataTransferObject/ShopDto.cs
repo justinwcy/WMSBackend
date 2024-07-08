@@ -11,17 +11,5 @@ namespace WMSBackend.DataTransferObject
         public string Address { get; set; } = string.Empty;
 
         public string Website { get; set; } = string.Empty;
-
-        public static ShopDto ToDto(Shop shop)
-        {
-            var outputDto = new ShopDto
-            {
-                Name = shop.Name,
-                Platform = shop.Platform,
-                Address = shop.Address,
-                Website = shop.Website
-            };
-            return outputDto;
-        }
     }
 }

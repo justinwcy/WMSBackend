@@ -21,22 +21,5 @@ namespace WMSBackend.DataTransferObject
         public double Length { get; set; }
 
         public double Width { get; set; }
-
-        public static ProductDto ToDto(Product product)
-        {
-            var outputDto = new ProductDto
-            {
-                Sku = product.Sku,
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                Tag = product.Tag,
-                Weight = product.Weight,
-                Height = product.Height,
-                Length = product.Length,
-                Width = product.Width
-            };
-            return outputDto;
-        }
     }
 }

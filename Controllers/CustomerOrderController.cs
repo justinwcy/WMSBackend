@@ -51,7 +51,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetCustomerOrder/{id}")]
+        [Route("GetCustomerOrder")]
         public async Task<ActionResult<CustomerOrder>> GetCustomerOrder(int id, bool isGetRelations)
         {
             var foundCustomerOrder = await _unitOfWork.CustomerOrderRepository.GetAsync(
@@ -142,7 +142,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetCustomerOrderDetail/{id}")]
+        [Route("GetCustomerOrderDetail")]
         public async Task<ActionResult<CustomerOrderDetail>> GetCustomerOrderDetail(
             int id,
             bool isGetRelations

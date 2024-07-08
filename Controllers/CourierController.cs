@@ -43,7 +43,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetCourier/{id}")]
+        [Route("GetCourier")]
         public async Task<ActionResult<Courier>> GetCourier(int id, bool isGetRelations)
         {
             var foundCourier = await _unitOfWork.CourierRepository.GetAsync(id, isGetRelations);

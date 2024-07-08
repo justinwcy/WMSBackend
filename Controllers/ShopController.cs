@@ -44,7 +44,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetShop/{id}")]
+        [Route("GetShop")]
         public async Task<ActionResult<Shop>> GetShop(int id, bool isGetRelations)
         {
             var foundShop = await _unitOfWork.ShopRepository.GetAsync(id, isGetRelations);

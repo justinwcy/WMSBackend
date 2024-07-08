@@ -45,7 +45,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetCustomer/{id}")]
+        [Route("GetCustomer")]
         public async Task<ActionResult<Customer>> GetCustomer(string id, bool isGetRelations)
         {
             var foundCustomer = await _unitOfWork.CustomerRepository.GetAsync(id, isGetRelations);

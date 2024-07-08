@@ -49,7 +49,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetProduct/{id}")]
+        [Route("GetProduct")]
         public async Task<ActionResult<Product>> GetProduct(int id, bool isGetRelations)
         {
             var foundProduct = await _unitOfWork.ProductRepository.GetAsync(id, isGetRelations);
@@ -130,7 +130,7 @@ namespace WMSBackend.Controllers
         }
 
         [HttpGet]
-        [Route("GetInventoryItem/{id}")]
+        [Route("GetInventoryItem")]
         public async Task<ActionResult<Inventory>> GetInventoryItem(int id, bool isGetRelations)
         {
             var foundProduct = await _unitOfWork.InventoryRepository.GetAsync(id, isGetRelations);
