@@ -1,6 +1,6 @@
 ﻿namespace WMSBackend.DataTransferObject
 {
-    public class CompanyDto
+    public class ZoneDto
     {
         public string Name { get; set; }
     }
