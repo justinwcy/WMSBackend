@@ -9,7 +9,7 @@ namespace WMSBackend.Models
         public string Name { get; set; } = string.Empty;
 
         // one to many relationship
-        public required int WarehouseId { get; set; }
+        public int WarehouseId { get; set; }
 
         [JsonIgnore]
         public Warehouse Warehouse { get; set; }

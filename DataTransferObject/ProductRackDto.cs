@@ -1,8 +1,8 @@
 ﻿namespace WMSBackend.DataTransferObject
 {
-    public class ProductRackDto
+    public class ZoneRackDto
     {
-        public int ProductId { get; set; }
+        public int ZoneId { get; set; }
 
         public int RackId { get; set; }
     }

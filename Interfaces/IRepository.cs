@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace WMSBackend.Interfaces
+﻿namespace WMSBackend.Interfaces
 {
     public interface IRepository<TEntity>
         where TEntity : class

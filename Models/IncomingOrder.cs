@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace WMSBackend.Models
+﻿namespace WMSBackend.Models
 {
     public class IncomingOrder
     {

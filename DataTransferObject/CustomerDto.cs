@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using WMSBackend.Models;
-
-namespace WMSBackend.DataTransferObject
+﻿namespace WMSBackend.DataTransferObject
 {
     public class CustomerDto
     {

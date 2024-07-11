@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace WMSBackend.Models
+﻿namespace WMSBackend.Models
 {
     public class ProductRack
     {

@@ -107,7 +107,7 @@ namespace WMSBackend.Controllers
         [Route("GetAllStaffs")]
         public async Task<ActionResult<List<Staff>>> GetAllStaffs(bool isGetRelations)
         {
-            var allCompanies = await _unitOfWork.CompanyRepository.GetAllAsync(isGetRelations);
+            var allCompanies = await _unitOfWork.StaffRepository.GetAllAsync(isGetRelations);
 
             return Ok(allCompanies);
         }
@@ -195,8 +195,8 @@ namespace WMSBackend.Controllers
         }
 
         [HttpPost]
-        [Route("DeleteCompanyProductRelationship")]
-        public async Task<ActionResult<Company>> DeleteCompanyProductRelationship(
+        [Route("DeleteCompanyStaffRelationship")]
+        public async Task<ActionResult<Company>> DeleteCompanyStaffRelationship(
             CompanyStaffDto companyStaffDto
         )
         {

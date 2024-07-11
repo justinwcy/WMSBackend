@@ -1,6 +1,4 @@
-﻿using WMSBackend.Models;
-
-namespace WMSBackend.DataTransferObject
+﻿namespace WMSBackend.DataTransferObject
 {
     public class CustomerOrderDetailDto
     {
