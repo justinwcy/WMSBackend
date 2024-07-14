@@ -42,32 +42,32 @@ namespace WMSBackend.Repositories
 
             if (isGetIncomingOrders)
             {
-                products.Include(product => product.IncomingOrders);
+                products = products.Include(product => product.IncomingOrders);
             }
 
             if (isGetRefundOrders)
             {
-                products.Include(product => product.RefundOrders);
+                products = products.Include(product => product.RefundOrders);
             }
 
             if (isGetShops)
             {
-                products.Include(product => product.Shops);
+                products = products.Include(product => product.Shops);
             }
 
             if (isGetRacks)
             {
-                products.Include(product => product.Racks);
+                products = products.Include(product => product.Racks);
             }
 
             if (isGetCurrentInventory)
             {
-                products.Include(product => product.CurrentInventory);
+                products = products.Include(product => product.CurrentInventory);
             }
 
             if (isGetCustomerOrderDetails)
             {
-                products.Include(product => product.CustomerOrderDetails);
+                products = products.Include(product => product.CustomerOrderDetails);
             }
 
             return await products.ToListAsync();

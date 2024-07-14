@@ -87,7 +87,6 @@ namespace WMSBackend.Repositories
             var foundCustomerOrderDetail = await GetAsync(customerOrderDetail.Id, false);
             if (foundCustomerOrderDetail != null)
             {
-                foundCustomerOrderDetail.OrderBin = customerOrderDetail.OrderBin;
                 foundCustomerOrderDetail.Quantity = customerOrderDetail.Quantity;
                 foundCustomerOrderDetail.Status = customerOrderDetail.Status;
                 return true;

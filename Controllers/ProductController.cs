@@ -96,7 +96,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Incoming Order not found");
             }
 
-            var success = await _unitOfWork.ProductRepository.Delete(id);
+            var success = await _unitOfWork.ProductRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);
@@ -174,7 +174,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Inventory item not found");
             }
 
-            var success = await _unitOfWork.InventoryRepository.Delete(id);
+            var success = await _unitOfWork.InventoryRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);

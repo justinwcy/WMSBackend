@@ -25,7 +25,9 @@ namespace WMSBackend.Controllers
             var newIncomingOrder = new IncomingOrder
             {
                 IncomingDate = incomingOrderDto.IncomingDate,
+                ReceivingDate = incomingOrderDto.ReceivingDate,
                 Status = incomingOrderDto.Status,
+                PONumber = incomingOrderDto.PONumber
             };
 
             var createdIncomingOrder = await _unitOfWork.IncomingOrderRepository.AddAsync(
@@ -97,7 +99,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Incoming Order not found");
             }
 
-            var success = await _unitOfWork.IncomingOrderRepository.Delete(id);
+            var success = await _unitOfWork.IncomingOrderRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);
@@ -106,9 +108,9 @@ namespace WMSBackend.Controllers
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [HttpPost]
         [Route("CreateIncomingOrderProductRelationship")]
-        public async Task<ActionResult<IncomingOrder>> CreateIncomingOrderProductRelationship(
-            IncomingOrderProductDto incomingOrderProductDto
-        )
+        public async Task<
+            ActionResult<IncomingOrderProduct>
+        > CreateIncomingOrderProductRelationship(IncomingOrderProductDto incomingOrderProductDto)
         {
             var foundIncomingOrder = await _unitOfWork.IncomingOrderRepository.GetAsync(
                 incomingOrderProductDto.IncomingOrderId,
@@ -128,20 +130,67 @@ namespace WMSBackend.Controllers
                 false,
                 false
             );
+
             if (foundProduct == null)
             {
                 return NotFound("Product not found");
             }
 
+            var incomingOrderProduct = new IncomingOrderProduct()
+            {
+                IncomingOrderId = incomingOrderProductDto.IncomingOrderId,
+                ProductId = incomingOrderProductDto.ProductId,
+                Quantity = incomingOrderProductDto.Quantity,
+                Status = incomingOrderProductDto.Status
+            };
+
+            var createdIncomingOrderProduct =
+                await _unitOfWork.IncomingOrderProductRepository.AddAsync(incomingOrderProduct);
             foundIncomingOrder.Products.Add(foundProduct);
             await _unitOfWork.CommitAsync();
 
-            return Ok(foundIncomingOrder);
+            return Ok(createdIncomingOrderProduct);
+        }
+
+        [HttpPost]
+        [Route("UpdateIncomingOrderProductRelationship")]
+        public async Task<
+            ActionResult<IncomingOrderProduct>
+        > UpdateIncomingOrderProductRelationship(IncomingOrderProductDto incomingOrderProductDto)
+        {
+            var foundIncomingOrderProducts =
+                await _unitOfWork.IncomingOrderProductRepository.FindAsync(
+                    incomingOrderProduct =>
+                        incomingOrderProduct.IncomingOrderId
+                            == incomingOrderProductDto.IncomingOrderId
+                        && incomingOrderProduct.ProductId == incomingOrderProductDto.ProductId,
+                    false
+                );
+
+            if (foundIncomingOrderProducts == null)
+            {
+                return BadRequest("IncomingOrderProduct Relationship not found");
+            }
+
+            if (foundIncomingOrderProducts.Count() > 1)
+            {
+                return BadRequest(
+                    "Multiple IncomingOrderProduct Relationship found, should be unique!"
+                );
+            }
+
+            var foundIncomingOrderProduct = foundIncomingOrderProducts.First();
+            foundIncomingOrderProduct.Quantity = incomingOrderProductDto.Quantity;
+            foundIncomingOrderProduct.Status = incomingOrderProductDto.Status;
+
+            await _unitOfWork.CommitAsync();
+
+            return Ok(foundIncomingOrderProduct);
         }
 
         [HttpPost]
         [Route("DeleteIncomingOrderProductRelationship")]
-        public async Task<ActionResult<IncomingOrder>> DeleteIncomingOrderProductRelationship(
+        public async Task<ActionResult<bool>> DeleteIncomingOrderProductRelationship(
             IncomingOrderProductDto incomingOrderProductDto
         )
         {
@@ -168,10 +217,34 @@ namespace WMSBackend.Controllers
                 return NotFound("Product not found");
             }
 
+            var foundIncomingOrderProducts =
+                await _unitOfWork.IncomingOrderProductRepository.FindAsync(
+                    incomingOrderProduct =>
+                        incomingOrderProduct.IncomingOrderId
+                            == incomingOrderProductDto.IncomingOrderId
+                        && incomingOrderProduct.ProductId == incomingOrderProductDto.ProductId,
+                    false
+                );
+
+            if (foundIncomingOrderProducts == null)
+            {
+                return BadRequest("IncomingOrderProduct Relationship not found");
+            }
+
+            if (foundIncomingOrderProducts.Count() > 1)
+            {
+                return BadRequest(
+                    "Multiple IncomingOrderProduct Relationship found, should be unique!"
+                );
+            }
+
+            var success = await _unitOfWork.IncomingOrderProductRepository.DeleteAsync(
+                foundIncomingOrderProducts.First().Id
+            );
             foundIncomingOrder.Products.Remove(foundProduct);
             await _unitOfWork.CommitAsync();
 
-            return Ok(foundIncomingOrder);
+            return Ok(success);
         }
     }
 }

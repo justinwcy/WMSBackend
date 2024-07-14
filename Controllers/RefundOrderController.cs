@@ -95,7 +95,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Refund Order not found");
             }
 
-            var success = await _unitOfWork.RefundOrderRepository.Delete(id);
+            var success = await _unitOfWork.RefundOrderRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);

@@ -6,6 +6,6 @@ namespace WMSBackend.Interfaces
         where TEntity : class
     {
         Task<TEntity?> GetAsync(int id, bool isGetRelations);
-        Task<bool> Delete(int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

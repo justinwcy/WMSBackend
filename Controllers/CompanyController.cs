@@ -78,7 +78,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Company not found");
             }
 
-            var success = await _unitOfWork.CompanyRepository.Delete(id);
+            var success = await _unitOfWork.CompanyRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);

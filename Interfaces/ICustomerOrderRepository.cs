@@ -7,13 +7,15 @@ namespace WMSBackend.Interfaces
         Task<List<CustomerOrder>> GetAllAsync(
             bool isGetCustomer,
             bool isGetCustomerOrderDetails,
-            bool isGetCourier
+            bool isGetCourier,
+            bool isGetBin
         );
         Task<CustomerOrder?> GetAsync(
             int id,
             bool isGetCustomer,
             bool isGetCustomerOrderDetails,
-            bool isGetCourier
+            bool isGetCourier,
+            bool isGetBin
         );
     }
 }

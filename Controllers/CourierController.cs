@@ -84,13 +84,13 @@ namespace WMSBackend.Controllers
                 return NotFound("Courier not found");
             }
 
-            var success = await _unitOfWork.CourierRepository.Delete(id);
+            var success = await _unitOfWork.CourierRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [HttpPost]
         [Route("CreateCourierProductRelationship")]
         public async Task<ActionResult<Courier>> CreateCourierProductRelationship(
@@ -110,7 +110,8 @@ namespace WMSBackend.Controllers
                 courierCustomerOrderDto.CustomerOrderId,
                 false,
                 false,
-                true
+                true,
+                false
             );
             if (foundCustomerOrder == null)
             {
@@ -142,7 +143,8 @@ namespace WMSBackend.Controllers
                 courierCustomerOrderDto.CustomerOrderId,
                 false,
                 false,
-                true
+                true,
+                false
             );
             if (foundCustomerOrder == null)
             {

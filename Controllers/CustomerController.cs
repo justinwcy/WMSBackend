@@ -115,6 +115,7 @@ namespace WMSBackend.Controllers
                 customerCustomerOrderDto.CustomerOrderId,
                 true,
                 false,
+                false,
                 false
             );
             if (foundCustomerOrder == null)
@@ -146,6 +147,7 @@ namespace WMSBackend.Controllers
             var foundCustomerOrder = await _unitOfWork.CustomerOrderRepository.GetAsync(
                 customerCustomerOrderDto.CustomerOrderId,
                 true,
+                false,
                 false,
                 false
             );

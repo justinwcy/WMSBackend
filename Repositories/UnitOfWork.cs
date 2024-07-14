@@ -1,5 +1,6 @@
 ﻿using WMSBackend.Data;
 using WMSBackend.Interfaces;
+using WMSBackend.Models;
 
 namespace WMSBackend.Repositories
 {
@@ -10,11 +11,13 @@ namespace WMSBackend.Repositories
         public UnitOfWork(WmsDbContext wmsDbContext)
         {
             _wmsDbContext = wmsDbContext;
+            BinRepository = new BinRepository(wmsDbContext);
             CompanyRepository = new CompanyRepository(wmsDbContext);
             CourierRepository = new CourierRepository(wmsDbContext);
             CustomerOrderDetailRepository = new CustomerOrderDetailRepository(wmsDbContext);
             CustomerOrderRepository = new CustomerOrderRepository(wmsDbContext);
             CustomerRepository = new CustomerRepository(wmsDbContext);
+            IncomingOrderProductRepository = new IncomingOrderProductRepository(wmsDbContext);
             IncomingOrderRepository = new IncomingOrderRepository(wmsDbContext);
             InventoryRepository = new InventoryRepository(wmsDbContext);
             ProductRepository = new ProductRepository(wmsDbContext);
@@ -22,10 +25,12 @@ namespace WMSBackend.Repositories
             RefundOrderRepository = new RefundOrderRepository(wmsDbContext);
             ShopRepository = new ShopRepository(wmsDbContext);
             StaffRepository = new StaffRepository(wmsDbContext);
+            VendorRepository = new VendorRepository(wmsDbContext);
             WarehouseRepository = new WarehouseRepository(wmsDbContext);
             ZoneRepository = new ZoneRepository(wmsDbContext);
         }
 
+        public IBinRepository BinRepository { get; private set; }
         public ICompanyRepository CompanyRepository { get; private set; }
 
         public ICourierRepository CourierRepository { get; private set; }
@@ -36,6 +41,7 @@ namespace WMSBackend.Repositories
 
         public ICustomerRepository CustomerRepository { get; private set; }
 
+        public IIncomingOrderProductRepository IncomingOrderProductRepository { get; private set; }
         public IIncomingOrderRepository IncomingOrderRepository { get; private set; }
 
         public IInventoryRepository InventoryRepository { get; private set; }
@@ -49,6 +55,8 @@ namespace WMSBackend.Repositories
         public IShopRepository ShopRepository { get; private set; }
 
         public IStaffRepository StaffRepository { get; private set; }
+
+        public IVendorRepository VendorRepository { get; private set; }
 
         public IWarehouseRepository WarehouseRepository { get; private set; }
 

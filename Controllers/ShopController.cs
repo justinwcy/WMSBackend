@@ -87,7 +87,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Shop not found");
             }
 
-            var success = await _unitOfWork.ShopRepository.Delete(id);
+            var success = await _unitOfWork.ShopRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);

@@ -20,9 +20,10 @@ namespace WMSBackend.Repositories
             if (isGetRelations)
             {
                 customerOrders = customerOrders
-                    .Include(customerOrders => customerOrders.Customer)
-                    .Include(customerOrders => customerOrders.CustomerOrderDetails)
-                    .Include(customerOrders => customerOrders.Courier);
+                    .Include(customerOrder => customerOrder.Customer)
+                    .Include(customerOrder => customerOrder.CustomerOrderDetails)
+                    .Include(customerOrder => customerOrder.Courier)
+                    .Include(customerOrder => customerOrder.Bin);
             }
 
             return await customerOrders.ToListAsync();
@@ -31,7 +32,8 @@ namespace WMSBackend.Repositories
         public async Task<List<CustomerOrder>> GetAllAsync(
             bool isGetCustomer,
             bool isGetCustomerOrderDetails,
-            bool isGetCourier
+            bool isGetCourier,
+            bool isGetBin
         )
         {
             var customerOrders = CustomerOrderContext.AsQueryable();
@@ -52,6 +54,11 @@ namespace WMSBackend.Repositories
                 customerOrders = customerOrders.Include(customerOrder => customerOrder.Courier);
             }
 
+            if (isGetBin)
+            {
+                customerOrders = customerOrders.Include(customerOrder => customerOrder.Bin);
+            }
+
             return await customerOrders.ToListAsync();
         }
 
@@ -65,13 +72,15 @@ namespace WMSBackend.Repositories
             int id,
             bool isGetCustomer,
             bool isGetCustomerOrderDetail,
-            bool isGetCourier
+            bool isGetCourier,
+            bool isGetBin
         )
         {
             var customerOrders = await GetAllAsync(
                 isGetCustomer,
                 isGetCustomerOrderDetail,
-                isGetCourier
+                isGetCourier,
+                isGetBin
             );
             return customerOrders.FirstOrDefault(customerOrder => customerOrder.Id == id);
         }

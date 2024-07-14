@@ -24,5 +24,8 @@ namespace WMSBackend.Models
         // one to many relationship
         public Courier Courier { get; set; }
         public int CourierId { get; set; }
+
+        public Bin Bin { get; set; }
+        public int BinId { get; set; }
     }
 }

@@ -2,11 +2,13 @@
 {
     public interface IUnitOfWork : IDisposable
     {
+        IBinRepository BinRepository { get; }
         ICompanyRepository CompanyRepository { get; }
         ICourierRepository CourierRepository { get; }
         ICustomerOrderDetailRepository CustomerOrderDetailRepository { get; }
         ICustomerOrderRepository CustomerOrderRepository { get; }
         ICustomerRepository CustomerRepository { get; }
+        IIncomingOrderProductRepository IncomingOrderProductRepository { get; }
         IIncomingOrderRepository IncomingOrderRepository { get; }
         IInventoryRepository InventoryRepository { get; }
         IProductRepository ProductRepository { get; }
@@ -14,6 +16,7 @@
         IRefundOrderRepository RefundOrderRepository { get; }
         IShopRepository ShopRepository { get; }
         IStaffRepository StaffRepository { get; }
+        IVendorRepository VendorRepository { get; }
         IWarehouseRepository WarehouseRepository { get; }
         IZoneRepository ZoneRepository { get; }
 

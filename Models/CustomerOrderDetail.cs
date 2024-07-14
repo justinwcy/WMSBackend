@@ -11,8 +11,6 @@ namespace WMSBackend.Models
         public int Quantity { get; set; }
         public string Status { get; set; }
 
-        public string? OrderBin { get; set; }
-
         [JsonIgnore]
         public CustomerOrder CustomerOrder { get; set; }
 

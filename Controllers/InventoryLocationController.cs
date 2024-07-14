@@ -78,7 +78,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Warehouse not found");
             }
 
-            var success = await _unitOfWork.WarehouseRepository.Delete(id);
+            var success = await _unitOfWork.WarehouseRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);
@@ -147,7 +147,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Zone not found");
             }
 
-            var success = await _unitOfWork.ZoneRepository.Delete(id);
+            var success = await _unitOfWork.ZoneRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);
@@ -226,7 +226,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Rack not found");
             }
 
-            var success = await _unitOfWork.RackRepository.Delete(id);
+            var success = await _unitOfWork.RackRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);

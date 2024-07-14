@@ -10,7 +10,7 @@ namespace WMSBackend.Repositories
         public CompanyRepository(DbContext context)
             : base(context) { }
 
-        public DbSet<Company> CompanyContext => ((WmsDbContext)Context).Company;
+        public DbSet<Company> CompanyContext => ((WmsDbContext)Context).Companies;
 
         public override async Task<IEnumerable<Company>> GetAllAsync(bool isGetRelations)
         {

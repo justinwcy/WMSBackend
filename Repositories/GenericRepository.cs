@@ -38,7 +38,7 @@ namespace WMSBackend.Repositories
             return null;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var foundEntity = await GetAsync(id, false);
             if (foundEntity != null)

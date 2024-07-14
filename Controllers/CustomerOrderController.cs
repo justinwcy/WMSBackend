@@ -99,7 +99,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Customer Order not found");
             }
 
-            var success = await _unitOfWork.CustomerOrderRepository.Delete(id);
+            var success = await _unitOfWork.CustomerOrderRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);
@@ -116,7 +116,6 @@ namespace WMSBackend.Controllers
             {
                 Quantity = customerOrderDetailDto.Quantity,
                 Status = customerOrderDetailDto.Status,
-                OrderBin = customerOrderDetailDto.OrderBin
             };
 
             var createdCustomerOrderDetail =
@@ -178,7 +177,6 @@ namespace WMSBackend.Controllers
 
             foundCustomerOrderDetail.Quantity = customerOrderDetailDto.Quantity;
             foundCustomerOrderDetail.Status = customerOrderDetailDto.Status;
-            foundCustomerOrderDetail.OrderBin = customerOrderDetailDto.OrderBin;
 
             var success = await _unitOfWork.CustomerOrderDetailRepository.UpdateAsync(
                 foundCustomerOrderDetail
@@ -201,7 +199,78 @@ namespace WMSBackend.Controllers
                 return NotFound("Customer Order Detail not found");
             }
 
-            var success = await _unitOfWork.CustomerOrderDetailRepository.Delete(id);
+            var success = await _unitOfWork.CustomerOrderDetailRepository.DeleteAsync(id);
+            var saveSuccess = await _unitOfWork.CommitAsync();
+
+            return Ok(success && saveSuccess > 0);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        [Route("CreateBin")]
+        public async Task<ActionResult<Bin>> CreateBin(BinDto binDto)
+        {
+            var newBin = new Bin { Name = binDto.Name, };
+
+            var createdBin = await _unitOfWork.BinRepository.AddAsync(newBin);
+            await _unitOfWork.CommitAsync();
+
+            return Ok(createdBin);
+        }
+
+        [HttpGet]
+        [Route("GetAllBins")]
+        public async Task<ActionResult<List<Bin>>> GetAllBins(int binId, bool isGetRelations)
+        {
+            var bins = await _unitOfWork.BinRepository.FindAsync(
+                x => x.Id == binId,
+                isGetRelations
+            );
+
+            return Ok(bins);
+        }
+
+        [HttpGet]
+        [Route("GetBin")]
+        public async Task<ActionResult<Bin>> GetBin(int id, bool isGetRelations)
+        {
+            var foundBin = await _unitOfWork.BinRepository.GetAsync(id, isGetRelations);
+            if (foundBin == null)
+            {
+                return NotFound("Bin not found");
+            }
+
+            return Ok(foundBin);
+        }
+
+        [HttpPut]
+        [Route("UpdateBin")]
+        public async Task<ActionResult<bool>> UpdateBin(int id, BinDto binDto)
+        {
+            var foundBin = await _unitOfWork.BinRepository.GetAsync(id, false);
+            if (foundBin == null)
+            {
+                return NotFound("Bin not found");
+            }
+            foundBin.Name = binDto.Name;
+
+            var success = await _unitOfWork.BinRepository.UpdateAsync(foundBin);
+            var saveSuccess = await _unitOfWork.CommitAsync();
+
+            return Ok(success && saveSuccess > 0);
+        }
+
+        [HttpDelete]
+        [Route("DeleteBin")]
+        public async Task<ActionResult<bool>> DeleteBin(int id)
+        {
+            var foundBin = await _unitOfWork.BinRepository.GetAsync(id, false);
+            if (foundBin == null)
+            {
+                return NotFound("Bin not found");
+            }
+
+            var success = await _unitOfWork.BinRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);
