@@ -2,7 +2,7 @@
 {
     public class IncomingOrder
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string PONumber { get; set; }
 
         public DateTime IncomingDate { get; set; }

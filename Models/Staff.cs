@@ -14,6 +14,8 @@ namespace WMSBackend.Models
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 
+        public List<StaffNotification> StaffNotifications { get; set; }
+
         // many to many relationship
         public List<Zone>? Zones { get; set; }
     }

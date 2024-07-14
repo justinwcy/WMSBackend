@@ -144,12 +144,9 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateInventoryItem")]
-        public async Task<ActionResult<bool>> UpdateInventoryItem(InventoryDto inventoryDto)
+        public async Task<ActionResult<bool>> UpdateInventoryItem(int id, InventoryDto inventoryDto)
         {
-            var foundInventoryItem = await _unitOfWork.InventoryRepository.GetAsync(
-                inventoryDto.ProductId,
-                false
-            );
+            var foundInventoryItem = await _unitOfWork.InventoryRepository.GetAsync(id, false);
             if (foundInventoryItem == null)
             {
                 return NotFound("Inventory item not found");

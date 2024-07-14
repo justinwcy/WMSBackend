@@ -4,7 +4,7 @@ namespace WMSBackend.Models
 {
     public class CustomerOrderDetail
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public int CustomerOrderId { get; set; }
 

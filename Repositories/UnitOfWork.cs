@@ -1,75 +1,74 @@
 ﻿using WMSBackend.Data;
 using WMSBackend.Interfaces;
-using WMSBackend.Models;
 
 namespace WMSBackend.Repositories
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork(WmsDbContext wmsDbContext) : IUnitOfWork
     {
-        private readonly WmsDbContext _wmsDbContext;
+        public IBinRepository BinRepository { get; private set; } = new BinRepository(wmsDbContext);
+        public ICompanyRepository CompanyRepository { get; private set; } =
+            new CompanyRepository(wmsDbContext);
 
-        public UnitOfWork(WmsDbContext wmsDbContext)
+        public ICourierRepository CourierRepository { get; private set; } =
+            new CourierRepository(wmsDbContext);
+
+        public ICustomerOrderDetailRepository CustomerOrderDetailRepository { get; private set; } =
+            new CustomerOrderDetailRepository(wmsDbContext);
+
+        public ICustomerOrderRepository CustomerOrderRepository { get; private set; } =
+            new CustomerOrderRepository(wmsDbContext);
+
+        public ICustomerRepository CustomerRepository { get; private set; } =
+            new CustomerRepository(wmsDbContext);
+
+        public IIncomingOrderProductRepository IncomingOrderProductRepository
         {
-            _wmsDbContext = wmsDbContext;
-            BinRepository = new BinRepository(wmsDbContext);
-            CompanyRepository = new CompanyRepository(wmsDbContext);
-            CourierRepository = new CourierRepository(wmsDbContext);
-            CustomerOrderDetailRepository = new CustomerOrderDetailRepository(wmsDbContext);
-            CustomerOrderRepository = new CustomerOrderRepository(wmsDbContext);
-            CustomerRepository = new CustomerRepository(wmsDbContext);
-            IncomingOrderProductRepository = new IncomingOrderProductRepository(wmsDbContext);
-            IncomingOrderRepository = new IncomingOrderRepository(wmsDbContext);
-            InventoryRepository = new InventoryRepository(wmsDbContext);
-            ProductRepository = new ProductRepository(wmsDbContext);
-            RackRepository = new RackRepository(wmsDbContext);
-            RefundOrderRepository = new RefundOrderRepository(wmsDbContext);
-            ShopRepository = new ShopRepository(wmsDbContext);
-            StaffRepository = new StaffRepository(wmsDbContext);
-            VendorRepository = new VendorRepository(wmsDbContext);
-            WarehouseRepository = new WarehouseRepository(wmsDbContext);
-            ZoneRepository = new ZoneRepository(wmsDbContext);
-        }
+            get;
+            private set;
+        } = new IncomingOrderProductRepository(wmsDbContext);
+        public IIncomingOrderRepository IncomingOrderRepository { get; private set; } =
+            new IncomingOrderRepository(wmsDbContext);
 
-        public IBinRepository BinRepository { get; private set; }
-        public ICompanyRepository CompanyRepository { get; private set; }
+        public IInventoryRepository InventoryRepository { get; private set; } =
+            new InventoryRepository(wmsDbContext);
 
-        public ICourierRepository CourierRepository { get; private set; }
+        public IProductRepository ProductRepository { get; private set; } =
+            new ProductRepository(wmsDbContext);
 
-        public ICustomerOrderDetailRepository CustomerOrderDetailRepository { get; private set; }
+        public IRackRepository RackRepository { get; private set; } =
+            new RackRepository(wmsDbContext);
 
-        public ICustomerOrderRepository CustomerOrderRepository { get; private set; }
+        public IRefundOrderProductRepository RefundOrderProductRepository { get; private set; } =
+            new RefundOrderProductRepository(wmsDbContext);
 
-        public ICustomerRepository CustomerRepository { get; private set; }
+        public IRefundOrderRepository RefundOrderRepository { get; private set; } =
+            new RefundOrderRepository(wmsDbContext);
 
-        public IIncomingOrderProductRepository IncomingOrderProductRepository { get; private set; }
-        public IIncomingOrderRepository IncomingOrderRepository { get; private set; }
+        public IShopRepository ShopRepository { get; private set; } =
+            new ShopRepository(wmsDbContext);
 
-        public IInventoryRepository InventoryRepository { get; private set; }
+        public IStaffRepository StaffRepository { get; private set; } =
+            new StaffRepository(wmsDbContext);
+        public IStaffNotificationRepository StaffNotificationRepository { get; private set; } =
+            new StaffNotificationRepository(wmsDbContext);
 
-        public IProductRepository ProductRepository { get; private set; }
+        public IVendorRepository VendorRepository { get; private set; } =
+            new VendorRepository(wmsDbContext);
 
-        public IRackRepository RackRepository { get; private set; }
+        public IWarehouseRepository WarehouseRepository { get; private set; } =
+            new WarehouseRepository(wmsDbContext);
 
-        public IRefundOrderRepository RefundOrderRepository { get; private set; }
-
-        public IShopRepository ShopRepository { get; private set; }
-
-        public IStaffRepository StaffRepository { get; private set; }
-
-        public IVendorRepository VendorRepository { get; private set; }
-
-        public IWarehouseRepository WarehouseRepository { get; private set; }
-
-        public IZoneRepository ZoneRepository { get; private set; }
+        public IZoneRepository ZoneRepository { get; private set; } =
+            new ZoneRepository(wmsDbContext);
 
         public async Task<int> CommitAsync()
         {
-            return await _wmsDbContext.SaveChangesAsync();
+            return await wmsDbContext.SaveChangesAsync();
         }
 
         public async void Dispose()
         {
-            await _wmsDbContext.DisposeAsync();
+            await wmsDbContext.DisposeAsync();
         }
     }
 }

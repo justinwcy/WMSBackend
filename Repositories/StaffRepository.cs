@@ -17,13 +17,20 @@ namespace WMSBackend.Repositories
             var staffs = StaffContext.AsQueryable();
             if (isGetRelations)
             {
-                staffs = staffs.Include(staff => staff.Company).Include(staff => staff.Zones);
+                staffs = staffs
+                    .Include(staff => staff.Company)
+                    .Include(staff => staff.Zones)
+                    .Include(staff => staff.StaffNotifications);
             }
 
             return await staffs.ToListAsync();
         }
 
-        public async Task<List<Staff>> GetAllAsync(bool isGetCompany, bool isGetZones)
+        public async Task<List<Staff>> GetAllAsync(
+            bool isGetCompany,
+            bool isGetZones,
+            bool isGetStaffNotifications
+        )
         {
             var staffs = StaffContext.AsQueryable();
             if (isGetCompany)
@@ -36,6 +43,11 @@ namespace WMSBackend.Repositories
                 staffs = staffs.Include(staff => staff.Zones);
             }
 
+            if (isGetStaffNotifications)
+            {
+                staffs = staffs.Include(staff => staff.StaffNotifications);
+            }
+
             return await staffs.ToListAsync();
         }
 
@@ -45,9 +57,14 @@ namespace WMSBackend.Repositories
             return staffs.FirstOrDefault(staff => staff.Id == id);
         }
 
-        public async Task<Staff?> GetAsync(string id, bool isGetCompany, bool isGetZones)
+        public async Task<Staff?> GetAsync(
+            string id,
+            bool isGetCompany,
+            bool isGetZones,
+            bool isGetStaffNotifications
+        )
         {
-            var staffs = await GetAllAsync(isGetCompany, isGetZones);
+            var staffs = await GetAllAsync(isGetCompany, isGetZones, isGetStaffNotifications);
             return staffs.FirstOrDefault(staff => staff.Id == id);
         }
 

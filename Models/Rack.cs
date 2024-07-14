@@ -4,7 +4,7 @@ namespace WMSBackend.Models
 {
     public class Rack
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         // one to many relationship
         public int ZoneId { get; set; }

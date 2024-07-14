@@ -18,10 +18,13 @@ namespace WMSBackend.Data
         public DbSet<IncomingOrderProduct> IncomingOrderProducts { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductSku> ProductSkus { get; set; }
         public DbSet<Rack> Racks { get; set; }
         public DbSet<RefundOrder> RefundOrders { get; set; }
+        public DbSet<RefundOrderProduct> RefundOrderProducts { get; set; }
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<StaffNotification> StaffNotifications { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<Zone> Zones { get; set; }
@@ -116,6 +119,23 @@ namespace WMSBackend.Data
                             .OnDelete(DeleteBehavior.Restrict)
                 );
 
+            modelBuilder
+                .Entity<Product>()
+                .HasMany(product => product.Sk)
+                .WithMany(rack => rack.Products)
+                .UsingEntity<ProductRack>(
+                    r =>
+                        r.HasOne<Rack>()
+                            .WithMany()
+                            .HasForeignKey(productRack => productRack.RackId)
+                            .OnDelete(DeleteBehavior.Restrict),
+                    l =>
+                        l.HasOne<Product>()
+                            .WithMany()
+                            .HasForeignKey(productRack => productRack.ProductId)
+                            .OnDelete(DeleteBehavior.Restrict)
+                );
+
             // one to many relationships
             modelBuilder
                 .Entity<Zone>()
@@ -157,6 +177,13 @@ namespace WMSBackend.Data
                 .HasMany(company => company.Staffs)
                 .WithOne(staff => staff.Company)
                 .HasForeignKey(staff => staff.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder
+                .Entity<Staff>()
+                .HasMany(staff => staff.StaffNotifications)
+                .WithOne(staffNotification => staffNotification.Staff)
+                .HasForeignKey(staffNotification => staffNotification.StaffId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder

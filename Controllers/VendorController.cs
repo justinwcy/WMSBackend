@@ -91,7 +91,7 @@ namespace WMSBackend.Controllers
                 return NotFound("Vendor not found");
             }
 
-            var success = await _unitOfWork.VendorRepository.Delete(id);
+            var success = await _unitOfWork.VendorRepository.DeleteAsync(id);
             var saveSuccess = await _unitOfWork.CommitAsync();
 
             return Ok(success && saveSuccess > 0);

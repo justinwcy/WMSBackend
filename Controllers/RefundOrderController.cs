@@ -104,7 +104,7 @@ namespace WMSBackend.Controllers
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         [HttpPost]
         [Route("CreateRefundOrderProductRelationship")]
-        public async Task<ActionResult<RefundOrder>> CreateRefundOrderProductRelationship(
+        public async Task<ActionResult<RefundOrderProduct>> CreateRefundOrderProductRelationship(
             RefundOrderProductDto refundOrderProductDto
         )
         {
@@ -126,10 +126,56 @@ namespace WMSBackend.Controllers
                 return NotFound("Product not found");
             }
 
+            var refundOrderProduct = new RefundOrderProduct()
+            {
+                RefundOrderId = refundOrderProductDto.RefundOrderId,
+                ProductId = refundOrderProductDto.ProductId,
+                Quantity = refundOrderProductDto.Quantity,
+                Status = refundOrderProductDto.Status
+            };
+
+            var createdRefundOrderProduct = await _unitOfWork.RefundOrderProductRepository.AddAsync(
+                refundOrderProduct
+            );
+
             foundRefundOrder.Products.Add(foundProduct);
             await _unitOfWork.CommitAsync();
 
-            return Ok(foundRefundOrder);
+            return Ok(createdRefundOrderProduct);
+        }
+
+        [HttpPost]
+        [Route("UpdateRefundOrderProductRelationship")]
+        public async Task<ActionResult<RefundOrderProduct>> UpdateRefundOrderProductRelationship(
+            RefundOrderProductDto refundOrderProductDto
+        )
+        {
+            var foundRefundOrderProducts = await _unitOfWork.RefundOrderProductRepository.FindAsync(
+                refundOrderProduct =>
+                    refundOrderProduct.RefundOrderId == refundOrderProductDto.RefundOrderId
+                    && refundOrderProduct.ProductId == refundOrderProductDto.ProductId,
+                false
+            );
+
+            if (foundRefundOrderProducts.Any())
+            {
+                return BadRequest("RefundOrderProduct Relationship not found");
+            }
+
+            if (foundRefundOrderProducts.Count() > 1)
+            {
+                return BadRequest(
+                    "Multiple RefundOrderProduct Relationship found, should be unique!"
+                );
+            }
+
+            var foundRefundOrderProduct = foundRefundOrderProducts.First();
+            foundRefundOrderProduct.Quantity = refundOrderProductDto.Quantity;
+            foundRefundOrderProduct.Status = refundOrderProductDto.Status;
+
+            await _unitOfWork.CommitAsync();
+
+            return Ok(foundRefundOrderProduct);
         }
 
         [HttpPost]
@@ -160,6 +206,29 @@ namespace WMSBackend.Controllers
             {
                 return NotFound("Product not found");
             }
+
+            var foundRefundOrderProducts = await _unitOfWork.RefundOrderProductRepository.FindAsync(
+                refundOrderProduct =>
+                    refundOrderProduct.RefundOrderId == refundOrderProductDto.RefundOrderId
+                    && refundOrderProduct.ProductId == refundOrderProductDto.ProductId,
+                false
+            );
+
+            if (foundRefundOrderProducts == null)
+            {
+                return BadRequest("RefundOrderProduct Relationship not found");
+            }
+
+            if (foundRefundOrderProducts.Count() > 1)
+            {
+                return BadRequest(
+                    "Multiple RefundOrderProduct Relationship found, should be unique!"
+                );
+            }
+
+            var success = await _unitOfWork.RefundOrderProductRepository.DeleteAsync(
+                foundRefundOrderProducts.First().Id
+            );
 
             foundRefundOrder.Products.Remove(foundProduct);
             await _unitOfWork.CommitAsync();

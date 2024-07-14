@@ -4,7 +4,7 @@ namespace WMSBackend.Models
 {
     public class CustomerOrder
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public DateTime ExpectedArrivalDate { get; set; }
 

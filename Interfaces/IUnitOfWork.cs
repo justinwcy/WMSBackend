@@ -13,9 +13,11 @@
         IInventoryRepository InventoryRepository { get; }
         IProductRepository ProductRepository { get; }
         IRackRepository RackRepository { get; }
+        IRefundOrderProductRepository RefundOrderProductRepository { get; }
         IRefundOrderRepository RefundOrderRepository { get; }
         IShopRepository ShopRepository { get; }
         IStaffRepository StaffRepository { get; }
+        IStaffNotificationRepository StaffNotificationRepository { get; }
         IVendorRepository VendorRepository { get; }
         IWarehouseRepository WarehouseRepository { get; }
         IZoneRepository ZoneRepository { get; }

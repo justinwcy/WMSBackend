@@ -333,7 +333,8 @@ namespace WMSBackend.Controllers
             var foundStaff = await _unitOfWork.StaffRepository.GetAsync(
                 zoneStaffDto.StaffId,
                 false,
-                true
+                true,
+                false
             );
             if (foundStaff == null)
             {

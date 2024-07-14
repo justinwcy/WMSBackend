@@ -167,7 +167,7 @@ namespace WMSBackend.Controllers
                     false
                 );
 
-            if (foundIncomingOrderProducts == null)
+            if (foundIncomingOrderProducts.Any())
             {
                 return BadRequest("IncomingOrderProduct Relationship not found");
             }

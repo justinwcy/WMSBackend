@@ -4,6 +4,6 @@
         where TEntity : class
     {
         Task<TEntity?> GetAsync(string id, bool isGetRelations);
-        Task<bool> Delete(string id);
+        Task<bool> DeleteAsync(string id);
     }
 }

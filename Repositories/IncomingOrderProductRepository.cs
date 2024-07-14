@@ -25,8 +25,8 @@ namespace WMSBackend.Repositories
 
         public override async Task<IncomingOrderProduct?> GetAsync(int id, bool isGetRelations)
         {
-            var incomingOrders = await GetAllAsync(isGetRelations);
-            return incomingOrders.FirstOrDefault(incomingOrderProduct =>
+            var incomingOrderProducts = await GetAllAsync(isGetRelations);
+            return incomingOrderProducts.FirstOrDefault(incomingOrderProduct =>
                 incomingOrderProduct.Id == id
             );
         }
@@ -36,17 +36,17 @@ namespace WMSBackend.Repositories
             bool isGetRelations
         )
         {
-            var incomingOrders = await GetAllAsync(isGetRelations);
-            return incomingOrders.Where(predicate);
+            var incomingOrderProducts = await GetAllAsync(isGetRelations);
+            return incomingOrderProducts.Where(predicate);
         }
 
         public override async Task<bool> UpdateAsync(IncomingOrderProduct incomingOrderProduct)
         {
-            var foundIncomingOrder = await GetAsync(incomingOrderProduct.Id, false);
-            if (foundIncomingOrder != null)
+            var foundIncomingOrderProduct = await GetAsync(incomingOrderProduct.Id, false);
+            if (foundIncomingOrderProduct != null)
             {
-                foundIncomingOrder.Quantity = incomingOrderProduct.Quantity;
-                foundIncomingOrder.Status = incomingOrderProduct.Status;
+                foundIncomingOrderProduct.Quantity = incomingOrderProduct.Quantity;
+                foundIncomingOrderProduct.Status = incomingOrderProduct.Status;
 
                 return true;
             }
