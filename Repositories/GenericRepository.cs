@@ -3,7 +3,7 @@ using WMSBackend.Interfaces;
 
 namespace WMSBackend.Repositories
 {
-    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
+    public abstract class GenericRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         protected readonly DbContext Context;
@@ -16,7 +16,7 @@ namespace WMSBackend.Repositories
             _dbSet = Context.Set<TEntity>();
         }
 
-        public abstract Task<TEntity?> GetAsync(int id, bool isGetRelations);
+        public abstract Task<TEntity?> GetAsync(Guid id, bool isGetRelations);
 
         public abstract Task<IEnumerable<TEntity>> GetAllAsync(bool isGetRelations);
 
@@ -38,7 +38,7 @@ namespace WMSBackend.Repositories
             return null;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
             var foundEntity = await GetAsync(id, false);
             if (foundEntity != null)

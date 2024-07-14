@@ -2,7 +2,7 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface ICustomerOrderRepository : IGenericRepository<CustomerOrder>
+    public interface ICustomerOrderRepository : IRepository<CustomerOrder>
     {
         Task<List<CustomerOrder>> GetAllAsync(
             bool isGetCustomer,
@@ -11,7 +11,7 @@ namespace WMSBackend.Interfaces
             bool isGetBin
         );
         Task<CustomerOrder?> GetAsync(
-            int id,
+            Guid id,
             bool isGetCustomer,
             bool isGetCustomerOrderDetails,
             bool isGetCourier,

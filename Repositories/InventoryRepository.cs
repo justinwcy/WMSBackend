@@ -23,7 +23,7 @@ namespace WMSBackend.Repositories
             return await inventories.ToListAsync();
         }
 
-        public override async Task<Inventory?> GetAsync(int id, bool isGetRelations)
+        public override async Task<Inventory?> GetAsync(Guid id, bool isGetRelations)
         {
             var inventories = await GetAllAsync(isGetRelations);
             return inventories.FirstOrDefault(inventory => inventory.ProductId == id);

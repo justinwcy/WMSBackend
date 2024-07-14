@@ -73,14 +73,14 @@ namespace WMSBackend.Repositories
             return await products.ToListAsync();
         }
 
-        public override async Task<Product?> GetAsync(int id, bool isGetRelations)
+        public override async Task<Product?> GetAsync(Guid id, bool isGetRelations)
         {
             var products = await GetAllAsync(isGetRelations);
             return products.FirstOrDefault(product => product.Id == id);
         }
 
         public async Task<Product?> GetAsync(
-            int id,
+            Guid id,
             bool isGetIncomingOrders,
             bool isGetRefundOrders,
             bool isGetShops,
@@ -115,7 +115,6 @@ namespace WMSBackend.Repositories
             var foundProduct = await GetAsync(product.Id, false);
             if (foundProduct != null)
             {
-                foundProduct.Sku = product.Sku;
                 foundProduct.Name = product.Name;
                 foundProduct.Description = product.Description;
                 foundProduct.Price = product.Price;

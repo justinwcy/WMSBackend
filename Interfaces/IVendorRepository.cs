@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IVendorRepository : IUserRepository<Vendor> { }
+    public interface IVendorRepository : IRepository<Vendor> { }
 }

@@ -5,17 +5,17 @@ using WMSBackend.Models;
 
 namespace WMSBackend.Repositories
 {
-    public class VendorRepository : UserRepository<Vendor>, IVendorRepository
+    public class VendorRepository : GenericRepository<Vendor>, IVendorRepository
     {
         public VendorRepository(DbContext context)
             : base(context) { }
 
         public DbSet<Vendor> VendorContext => ((WmsDbContext)Context).Vendors;
 
-        public override async Task<Vendor?> GetAsync(string id, bool isGetRelations)
+        public override async Task<Vendor?> GetAsync(Guid id, bool isGetRelations)
         {
             var vendors = await GetAllAsync(isGetRelations);
-            return vendors.FirstOrDefault(vendor => vendor.Id == id);
+            return vendors.FirstOrDefault(vendor => vendor.Id == id.ToString());
         }
 
         public override async Task<IEnumerable<Vendor>> GetAllAsync(bool isGetRelations)
@@ -40,7 +40,7 @@ namespace WMSBackend.Repositories
 
         public override async Task<bool> UpdateAsync(Vendor vendor)
         {
-            var foundVendor = await GetAsync(vendor.Id, false);
+            var foundVendor = await GetAsync(new Guid(vendor.Id), false);
             if (foundVendor != null)
             {
                 foundVendor.FirstName = vendor.FirstName;

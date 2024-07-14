@@ -18,6 +18,8 @@ namespace WMSBackend.Data
         public DbSet<IncomingOrderProduct> IncomingOrderProducts { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductRack> ProductRacks { get; set; }
+        public DbSet<ProductShop> ProductShops { get; set; }
         public DbSet<ProductSku> ProductSkus { get; set; }
         public DbSet<Rack> Racks { get; set; }
         public DbSet<RefundOrder> RefundOrders { get; set; }
@@ -28,6 +30,7 @@ namespace WMSBackend.Data
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<Zone> Zones { get; set; }
+        public DbSet<ZoneStaff> ZoneStaffs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -121,20 +124,9 @@ namespace WMSBackend.Data
 
             modelBuilder
                 .Entity<Product>()
-                .HasMany(product => product.Sk)
-                .WithMany(rack => rack.Products)
-                .UsingEntity<ProductRack>(
-                    r =>
-                        r.HasOne<Rack>()
-                            .WithMany()
-                            .HasForeignKey(productRack => productRack.RackId)
-                            .OnDelete(DeleteBehavior.Restrict),
-                    l =>
-                        l.HasOne<Product>()
-                            .WithMany()
-                            .HasForeignKey(productRack => productRack.ProductId)
-                            .OnDelete(DeleteBehavior.Restrict)
-                );
+                .HasMany(product => product.ProductSkus)
+                .WithOne(productSku => productSku.Product)
+                .HasForeignKey(productSku => productSku.ProductId);
 
             // one to many relationships
             modelBuilder

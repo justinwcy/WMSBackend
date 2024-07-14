@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IShopRepository : IGenericRepository<Shop> { }
+    public interface IShopRepository : IRepository<Shop> { }
 }

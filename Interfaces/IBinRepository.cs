@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IBinRepository : IGenericRepository<Bin> { }
+    public interface IBinRepository : IRepository<Bin> { }
 }

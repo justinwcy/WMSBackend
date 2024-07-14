@@ -23,7 +23,7 @@ namespace WMSBackend.Repositories
             return await incomingOrderProducts.ToListAsync();
         }
 
-        public override async Task<IncomingOrderProduct?> GetAsync(int id, bool isGetRelations)
+        public override async Task<IncomingOrderProduct?> GetAsync(Guid id, bool isGetRelations)
         {
             var incomingOrderProducts = await GetAllAsync(isGetRelations);
             return incomingOrderProducts.FirstOrDefault(incomingOrderProduct =>

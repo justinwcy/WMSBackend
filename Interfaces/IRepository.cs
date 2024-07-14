@@ -5,14 +5,14 @@
     {
         Task<TEntity?> AddAsync(TEntity entity);
 
-        // GetAsync is implemented at IGenericRepository and IUserRepository
-        // This is because IGenericRepository needs int as id
-        // IUserRepository needs string as id
-
         Task<IEnumerable<TEntity>> GetAllAsync(bool isGetRelations);
+
+        Task<TEntity?> GetAsync(Guid id, bool isGetRelations);
 
         Task<IEnumerable<TEntity>> FindAsync(Func<TEntity, bool> predicate, bool isGetRelations);
 
         Task<bool> UpdateAsync(TEntity entity);
+
+        Task<bool> DeleteAsync(Guid id);
     }
 }

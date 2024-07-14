@@ -49,7 +49,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetRefundOrder")]
-        public async Task<ActionResult<RefundOrder>> GetRefundOrder(int id, bool isGetRelations)
+        public async Task<ActionResult<RefundOrder>> GetRefundOrder(Guid id, bool isGetRelations)
         {
             var foundRefundOrder = await _unitOfWork.RefundOrderRepository.GetAsync(
                 id,
@@ -66,7 +66,7 @@ namespace WMSBackend.Controllers
         [HttpPut]
         [Route("UpdateRefundOrder")]
         public async Task<ActionResult<bool>> UpdateRefundOrder(
-            int id,
+            Guid id,
             RefundOrderDto refundOrderDto
         )
         {
@@ -87,7 +87,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteRefundOrder")]
-        public async Task<ActionResult<bool>> DeleteRefundOrder(int id)
+        public async Task<ActionResult<bool>> DeleteRefundOrder(Guid id)
         {
             var foundRefundOrder = await _unitOfWork.RefundOrderRepository.GetAsync(id, false);
             if (foundRefundOrder == null)

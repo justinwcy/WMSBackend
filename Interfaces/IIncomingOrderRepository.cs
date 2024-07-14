@@ -2,9 +2,9 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IIncomingOrderRepository : IGenericRepository<IncomingOrder>
+    public interface IIncomingOrderRepository : IRepository<IncomingOrder>
     {
-        Task<IncomingOrder?> GetAsync(int id, bool isGetProducts, bool isGetVendor);
+        Task<IncomingOrder?> GetAsync(Guid id, bool isGetProducts, bool isGetVendor);
 
         Task<List<IncomingOrder>> GetAllAsync(bool isGetProducts, bool isGetVendor);
     }

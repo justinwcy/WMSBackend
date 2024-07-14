@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IStaffNotificationRepository : IGenericRepository<StaffNotification> { }
+    public interface IStaffNotificationRepository : IRepository<StaffNotification> { }
 }

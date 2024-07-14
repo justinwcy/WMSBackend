@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IIncomingOrderProductRepository : IGenericRepository<IncomingOrderProduct> { }
+    public interface IIncomingOrderProductRepository : IRepository<IncomingOrderProduct> { }
 }

@@ -2,10 +2,10 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IProductRepository : IGenericRepository<Product>
+    public interface IProductRepository : IRepository<Product>
     {
         Task<Product?> GetAsync(
-            int id,
+            Guid id,
             bool isGetIncomingOrders,
             bool isGetRefundOrders,
             bool isGetShops,

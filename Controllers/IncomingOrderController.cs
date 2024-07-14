@@ -53,7 +53,10 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetIncomingOrder")]
-        public async Task<ActionResult<IncomingOrder>> GetIncomingOrder(int id, bool isGetRelations)
+        public async Task<ActionResult<IncomingOrder>> GetIncomingOrder(
+            Guid id,
+            bool isGetRelations
+        )
         {
             var foundIncomingOrder = await _unitOfWork.IncomingOrderRepository.GetAsync(
                 id,
@@ -70,7 +73,7 @@ namespace WMSBackend.Controllers
         [HttpPut]
         [Route("UpdateIncomingOrder")]
         public async Task<ActionResult<bool>> UpdateIncomingOrder(
-            int id,
+            Guid id,
             IncomingOrderDto incomingOrderDto
         )
         {
@@ -91,7 +94,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteIncomingOrder")]
-        public async Task<ActionResult<bool>> DeleteIncomingOrder(int id)
+        public async Task<ActionResult<bool>> DeleteIncomingOrder(Guid id)
         {
             var foundIncomingOrder = await _unitOfWork.IncomingOrderRepository.GetAsync(id, false);
             if (foundIncomingOrder == null)

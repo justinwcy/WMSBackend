@@ -39,13 +39,13 @@ namespace WMSBackend.Repositories
             return await racks.ToListAsync();
         }
 
-        public override async Task<Rack?> GetAsync(int id, bool isGetRelations)
+        public override async Task<Rack?> GetAsync(Guid id, bool isGetRelations)
         {
             var racks = await GetAllAsync(isGetRelations);
             return racks.FirstOrDefault(rack => rack.Id == id);
         }
 
-        public async Task<Rack?> GetAsync(int id, bool isGetZone, bool isGetProducts)
+        public async Task<Rack?> GetAsync(Guid id, bool isGetZone, bool isGetProducts)
         {
             var racks = await GetAllAsync(isGetZone, isGetProducts);
             return racks.FirstOrDefault(rack => rack.Id == id);

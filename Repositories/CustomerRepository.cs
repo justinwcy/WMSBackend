@@ -5,17 +5,17 @@ using WMSBackend.Models;
 
 namespace WMSBackend.Repositories
 {
-    public class CustomerRepository : UserRepository<Customer>, ICustomerRepository
+    public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
     {
         public CustomerRepository(DbContext context)
             : base(context) { }
 
         public DbSet<Customer> CustomerContext => ((WmsDbContext)Context).Customers;
 
-        public override async Task<Customer?> GetAsync(string id, bool isGetRelations)
+        public override async Task<Customer?> GetAsync(Guid id, bool isGetRelations)
         {
             var customers = await GetAllAsync(isGetRelations);
-            return customers.FirstOrDefault(customer => customer.Id == id);
+            return customers.FirstOrDefault(customer => customer.Id == id.ToString());
         }
 
         public override async Task<IEnumerable<Customer>> GetAllAsync(bool isGetRelations)
@@ -40,7 +40,7 @@ namespace WMSBackend.Repositories
 
         public override async Task<bool> UpdateAsync(Customer customer)
         {
-            var foundCustomer = await GetAsync(customer.Id, false);
+            var foundCustomer = await GetAsync(new Guid(customer.Id), false);
             if (foundCustomer != null)
             {
                 foundCustomer.FirstName = customer.FirstName;

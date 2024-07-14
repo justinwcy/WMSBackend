@@ -53,7 +53,7 @@ namespace WMSBackend.Repositories
             return await customerOrderDetails.ToListAsync();
         }
 
-        public override async Task<CustomerOrderDetail?> GetAsync(int id, bool isGetRelations)
+        public override async Task<CustomerOrderDetail?> GetAsync(Guid id, bool isGetRelations)
         {
             var customerOrderDetails = await GetAllAsync(isGetRelations);
             return customerOrderDetails.FirstOrDefault(customerOrderDetail =>
@@ -62,7 +62,7 @@ namespace WMSBackend.Repositories
         }
 
         public async Task<CustomerOrderDetail?> GetAsync(
-            int id,
+            Guid id,
             bool isGetStaff,
             bool isGetWarehouse
         )

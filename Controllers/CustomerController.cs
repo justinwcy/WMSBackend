@@ -46,7 +46,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetCustomer")]
-        public async Task<ActionResult<Customer>> GetCustomer(string id, bool isGetRelations)
+        public async Task<ActionResult<Customer>> GetCustomer(Guid id, bool isGetRelations)
         {
             var foundCustomer = await _unitOfWork.CustomerRepository.GetAsync(id, isGetRelations);
             if (foundCustomer == null)
@@ -59,7 +59,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateCustomer")]
-        public async Task<ActionResult<bool>> UpdateCustomer(string id, CustomerDto customerDto)
+        public async Task<ActionResult<bool>> UpdateCustomer(Guid id, CustomerDto customerDto)
         {
             var foundCustomer = await _unitOfWork.CustomerRepository.GetAsync(id, false);
             if (foundCustomer == null)
@@ -81,7 +81,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteCustomer")]
-        public async Task<ActionResult<bool>> DeleteCustomer(string id)
+        public async Task<ActionResult<bool>> DeleteCustomer(Guid id)
         {
             var foundCustomer = await _unitOfWork.CustomerRepository.GetAsync(id, false);
             if (foundCustomer == null)

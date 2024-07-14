@@ -2,9 +2,9 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IRackRepository : IGenericRepository<Rack>
+    public interface IRackRepository : IRepository<Rack>
     {
         Task<List<Rack>> GetAllAsync(bool isGetZone, bool isGetProducts);
-        Task<Rack?> GetAsync(int id, bool isGetZone, bool isGetProducts);
+        Task<Rack?> GetAsync(Guid id, bool isGetZone, bool isGetProducts);
     }
 }

@@ -2,7 +2,7 @@
 {
     public class WarehouseCompanyDto
     {
-        public int WarehouseId { get; set; }
-        public int CompanyId { get; set; }
+        public Guid WarehouseId { get; set; }
+        public Guid CompanyId { get; set; }
     }
 }

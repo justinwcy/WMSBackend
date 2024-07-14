@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface ICustomerRepository : IUserRepository<Customer> { }
+    public interface ICustomerRepository : IRepository<Customer> { }
 }

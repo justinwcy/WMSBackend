@@ -2,9 +2,9 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface ICustomerOrderDetailRepository : IGenericRepository<CustomerOrderDetail>
+    public interface ICustomerOrderDetailRepository : IRepository<CustomerOrderDetail>
     {
         Task<List<CustomerOrderDetail>> GetAllAsync(bool isGetCustomerOrder, bool isGetProduct);
-        Task<CustomerOrderDetail?> GetAsync(int id, bool isGetCustomerOrder, bool isGetProduct);
+        Task<CustomerOrderDetail?> GetAsync(Guid id, bool isGetCustomerOrder, bool isGetProduct);
     }
 }

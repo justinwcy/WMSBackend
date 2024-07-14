@@ -48,7 +48,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetVendor")]
-        public async Task<ActionResult<Vendor>> GetVendor(string id, bool isGetRelations)
+        public async Task<ActionResult<Vendor>> GetVendor(Guid id, bool isGetRelations)
         {
             var foundVendor = await _unitOfWork.VendorRepository.GetAsync(id, isGetRelations);
             if (foundVendor == null)
@@ -61,7 +61,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateVendor")]
-        public async Task<ActionResult<bool>> UpdateVendor(string id, VendorDto vendorDto)
+        public async Task<ActionResult<bool>> UpdateVendor(Guid id, VendorDto vendorDto)
         {
             var foundVendor = await _unitOfWork.VendorRepository.GetAsync(id, false);
             if (foundVendor == null)
@@ -83,7 +83,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteVendor")]
-        public async Task<ActionResult<bool>> DeleteVendor(string id)
+        public async Task<ActionResult<bool>> DeleteVendor(Guid id)
         {
             var foundVendor = await _unitOfWork.VendorRepository.GetAsync(id, false);
             if (foundVendor == null)

@@ -2,8 +2,8 @@
 {
     public class CustomerOrderDetailProductDto
     {
-        public int CustomerOrderDetailId { get; set; }
+        public Guid CustomerOrderDetailId { get; set; }
 
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

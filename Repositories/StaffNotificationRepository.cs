@@ -28,7 +28,7 @@ namespace WMSBackend.Repositories
             return await staffNotifications.ToListAsync();
         }
 
-        public override async Task<StaffNotification?> GetAsync(int id, bool isGetRelations)
+        public override async Task<StaffNotification?> GetAsync(Guid id, bool isGetRelations)
         {
             var staffNotifications = await GetAllAsync(isGetRelations);
             return staffNotifications.FirstOrDefault(staffNotification =>

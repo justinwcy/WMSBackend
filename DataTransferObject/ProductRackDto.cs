@@ -2,8 +2,8 @@
 {
     public class ZoneRackDto
     {
-        public int ZoneId { get; set; }
+        public Guid ZoneId { get; set; }
 
-        public int RackId { get; set; }
+        public Guid RackId { get; set; }
     }
 }

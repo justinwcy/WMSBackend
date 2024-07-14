@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface ICourierRepository : IGenericRepository<Courier> { }
+    public interface ICourierRepository : IRepository<Courier> { }
 }

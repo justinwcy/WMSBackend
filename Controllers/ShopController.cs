@@ -45,7 +45,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetShop")]
-        public async Task<ActionResult<Shop>> GetShop(int id, bool isGetRelations)
+        public async Task<ActionResult<Shop>> GetShop(Guid id, bool isGetRelations)
         {
             var foundShop = await _unitOfWork.ShopRepository.GetAsync(id, isGetRelations);
             if (foundShop == null)
@@ -58,7 +58,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateShop")]
-        public async Task<ActionResult<bool>> UpdateShop(int id, ShopDto shopDto)
+        public async Task<ActionResult<bool>> UpdateShop(Guid id, ShopDto shopDto)
         {
             var foundShop = await _unitOfWork.ShopRepository.GetAsync(id, false);
             if (foundShop == null)
@@ -79,7 +79,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteShop")]
-        public async Task<ActionResult<bool>> DeleteShop(int id)
+        public async Task<ActionResult<bool>> DeleteShop(Guid id)
         {
             var foundShop = await _unitOfWork.ShopRepository.GetAsync(id, false);
             if (foundShop == null)

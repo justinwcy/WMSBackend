@@ -2,5 +2,5 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IInventoryRepository : IGenericRepository<Inventory> { }
+    public interface IInventoryRepository : IRepository<Inventory> { }
 }

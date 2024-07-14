@@ -26,6 +26,7 @@ namespace WMSBackend.Repositories
             get;
             private set;
         } = new IncomingOrderProductRepository(wmsDbContext);
+
         public IIncomingOrderRepository IncomingOrderRepository { get; private set; } =
             new IncomingOrderRepository(wmsDbContext);
 
@@ -34,6 +35,15 @@ namespace WMSBackend.Repositories
 
         public IProductRepository ProductRepository { get; private set; } =
             new ProductRepository(wmsDbContext);
+
+        public IProductRackRepository ProductRackRepository { get; private set; } =
+            new ProductRackRepository(wmsDbContext);
+
+        public IProductShopRepository ProductShopRepository { get; private set; } =
+            new ProductShopRepository(wmsDbContext);
+
+        public IProductSkuRepository ProductSkuRepository { get; private set; } =
+            new ProductSkuRepository(wmsDbContext);
 
         public IRackRepository RackRepository { get; private set; } =
             new RackRepository(wmsDbContext);
@@ -60,6 +70,9 @@ namespace WMSBackend.Repositories
 
         public IZoneRepository ZoneRepository { get; private set; } =
             new ZoneRepository(wmsDbContext);
+
+        public IZoneStaffRepository ZoneStaffRepository { get; private set; } =
+            new ZoneStaffRepository(wmsDbContext);
 
         public async Task<int> CommitAsync()
         {

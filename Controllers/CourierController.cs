@@ -44,7 +44,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetCourier")]
-        public async Task<ActionResult<Courier>> GetCourier(int id, bool isGetRelations)
+        public async Task<ActionResult<Courier>> GetCourier(Guid id, bool isGetRelations)
         {
             var foundCourier = await _unitOfWork.CourierRepository.GetAsync(id, isGetRelations);
             if (foundCourier == null)
@@ -57,7 +57,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateCourier")]
-        public async Task<ActionResult<bool>> UpdateCourier(int id, CourierDto courierDto)
+        public async Task<ActionResult<bool>> UpdateCourier(Guid id, CourierDto courierDto)
         {
             var foundCourier = await _unitOfWork.CourierRepository.GetAsync(id, false);
             if (foundCourier == null)
@@ -76,7 +76,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteCourier")]
-        public async Task<ActionResult<bool>> DeleteCourier(int id)
+        public async Task<ActionResult<bool>> DeleteCourier(Guid id)
         {
             var foundCourier = await _unitOfWork.CourierRepository.GetAsync(id, false);
             if (foundCourier == null)

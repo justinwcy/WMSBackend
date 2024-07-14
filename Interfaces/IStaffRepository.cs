@@ -2,7 +2,7 @@
 
 namespace WMSBackend.Interfaces
 {
-    public interface IStaffRepository : IUserRepository<Staff>
+    public interface IStaffRepository : IRepository<Staff>
     {
         Task<List<Staff>> GetAllAsync(bool isGetCompany, bool isGetZones, bool isGetNotifications);
         Task<Staff?> GetAsync(

@@ -5,7 +5,7 @@ using WMSBackend.Models;
 
 namespace WMSBackend.Repositories
 {
-    public class StaffRepository : UserRepository<Staff>, IStaffRepository
+    public class StaffRepository : GenericRepository<Staff>, IStaffRepository
     {
         public StaffRepository(DbContext context)
             : base(context) { }
@@ -51,10 +51,10 @@ namespace WMSBackend.Repositories
             return await staffs.ToListAsync();
         }
 
-        public override async Task<Staff?> GetAsync(string id, bool isGetRelations)
+        public override async Task<Staff?> GetAsync(Guid id, bool isGetRelations)
         {
             var staffs = await GetAllAsync(isGetRelations);
-            return staffs.FirstOrDefault(staff => staff.Id == id);
+            return staffs.FirstOrDefault(staff => staff.Id == id.ToString());
         }
 
         public async Task<Staff?> GetAsync(
@@ -79,7 +79,7 @@ namespace WMSBackend.Repositories
 
         public override async Task<bool> UpdateAsync(Staff staff)
         {
-            var foundStaff = await GetAsync(staff.Id, false);
+            var foundStaff = await GetAsync(new Guid(staff.Id), false);
             if (foundStaff != null)
             {
                 foundStaff.FirstName = staff.FirstName;

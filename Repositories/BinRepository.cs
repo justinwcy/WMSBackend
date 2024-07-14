@@ -23,7 +23,7 @@ namespace WMSBackend.Repositories
             return await bins.ToListAsync();
         }
 
-        public override async Task<Bin?> GetAsync(int id, bool isGetRelations)
+        public override async Task<Bin?> GetAsync(Guid id, bool isGetRelations)
         {
             var bins = await GetAllAsync(isGetRelations);
             return bins.FirstOrDefault(bin => bin.Id == id);

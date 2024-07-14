@@ -41,13 +41,13 @@ namespace WMSBackend.Repositories
             return await companies.ToListAsync();
         }
 
-        public override async Task<Company?> GetAsync(int id, bool isGetRelations)
+        public override async Task<Company?> GetAsync(Guid id, bool isGetRelations)
         {
             var companies = await GetAllAsync(isGetRelations);
             return companies.FirstOrDefault(company => company.Id == id);
         }
 
-        public async Task<Company?> GetAsync(int id, bool isGetStaff, bool isGetWarehouse)
+        public async Task<Company?> GetAsync(Guid id, bool isGetStaff, bool isGetWarehouse)
         {
             var companies = await GetAllAsync(isGetStaff, isGetWarehouse);
             return companies.FirstOrDefault(company => company.Id == id);

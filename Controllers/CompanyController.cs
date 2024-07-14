@@ -39,7 +39,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetCompany")]
-        public async Task<ActionResult<Company>> GetCompany(int id, bool isGetRelations)
+        public async Task<ActionResult<Company>> GetCompany(Guid id, bool isGetRelations)
         {
             var foundCompany = await _unitOfWork.CompanyRepository.GetAsync(id, isGetRelations);
             if (foundCompany == null)
@@ -52,7 +52,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateCompany")]
-        public async Task<ActionResult<bool>> UpdateCompany(int id, CompanyDto companyDto)
+        public async Task<ActionResult<bool>> UpdateCompany(Guid id, CompanyDto companyDto)
         {
             var foundCompany = await _unitOfWork.CompanyRepository.GetAsync(id, false);
             if (foundCompany == null)
@@ -70,7 +70,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteCompany")]
-        public async Task<ActionResult<bool>> DeleteCompany(int id)
+        public async Task<ActionResult<bool>> DeleteCompany(Guid id)
         {
             var foundCompany = await _unitOfWork.CompanyRepository.GetAsync(id, false);
             if (foundCompany == null)
@@ -114,7 +114,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetStaff")]
-        public async Task<ActionResult<Staff>> GetStaff(string id, bool isGetRelations)
+        public async Task<ActionResult<Staff>> GetStaff(Guid id, bool isGetRelations)
         {
             var foundStaff = await _unitOfWork.StaffRepository.GetAsync(id, isGetRelations);
             if (foundStaff == null)
@@ -127,7 +127,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateStaff")]
-        public async Task<ActionResult<bool>> UpdateStaff(string id, StaffDto staffDto)
+        public async Task<ActionResult<bool>> UpdateStaff(Guid id, StaffDto staffDto)
         {
             var foundStaff = await _unitOfWork.StaffRepository.GetAsync(id, false);
             if (foundStaff == null)
@@ -148,7 +148,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteStaff")]
-        public async Task<ActionResult<bool>> DeleteStaff(string id)
+        public async Task<ActionResult<bool>> DeleteStaff(Guid id)
         {
             var foundStaff = await _unitOfWork.StaffRepository.GetAsync(id, false);
             if (foundStaff == null)
@@ -201,7 +201,7 @@ namespace WMSBackend.Controllers
         [HttpGet]
         [Route("GetStaffNotification")]
         public async Task<ActionResult<StaffNotification>> GetStaffNotification(
-            int id,
+            Guid id,
             bool isGetRelations
         )
         {
@@ -220,7 +220,7 @@ namespace WMSBackend.Controllers
         [HttpPut]
         [Route("UpdateStaffNotification")]
         public async Task<ActionResult<bool>> UpdateStaffNotification(
-            int id,
+            Guid id,
             StaffNotificationDto staffNotificationDto
         )
         {
@@ -248,7 +248,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteStaffNotification")]
-        public async Task<ActionResult<bool>> DeleteStaffNotification(int id)
+        public async Task<ActionResult<bool>> DeleteStaffNotification(Guid id)
         {
             var foundStaffNotification = await _unitOfWork.StaffNotificationRepository.GetAsync(
                 id,
@@ -283,7 +283,7 @@ namespace WMSBackend.Controllers
             }
 
             var foundStaff = await _unitOfWork.StaffRepository.GetAsync(
-                companyStaffDto.StaffId,
+                companyStaffDto.StaffId.ToString(),
                 true,
                 false,
                 false
@@ -315,7 +315,7 @@ namespace WMSBackend.Controllers
             }
 
             var foundStaff = await _unitOfWork.StaffRepository.GetAsync(
-                companyStaffDto.StaffId,
+                companyStaffDto.StaffId.ToString(),
                 true,
                 false,
                 false

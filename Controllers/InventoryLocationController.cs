@@ -39,7 +39,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetWarehouse")]
-        public async Task<ActionResult<Warehouse>> GetWarehouse(int id, bool isGetRelations)
+        public async Task<ActionResult<Warehouse>> GetWarehouse(Guid id, bool isGetRelations)
         {
             var foundWarehouse = await _unitOfWork.WarehouseRepository.GetAsync(id, isGetRelations);
             if (foundWarehouse == null)
@@ -52,7 +52,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateWarehouse")]
-        public async Task<ActionResult<bool>> UpdateWarehouse(int id, WarehouseDto warehouseDto)
+        public async Task<ActionResult<bool>> UpdateWarehouse(Guid id, WarehouseDto warehouseDto)
         {
             var foundWarehouse = await _unitOfWork.WarehouseRepository.GetAsync(id, false);
             if (foundWarehouse == null)
@@ -70,7 +70,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteWarehouse")]
-        public async Task<ActionResult<bool>> DeleteWarehouse(int id)
+        public async Task<ActionResult<bool>> DeleteWarehouse(Guid id)
         {
             var foundWarehouse = await _unitOfWork.WarehouseRepository.GetAsync(id, false);
             if (foundWarehouse == null)
@@ -108,7 +108,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetZone")]
-        public async Task<ActionResult<Zone>> GetZone(int id, bool isGetRelations)
+        public async Task<ActionResult<Zone>> GetZone(Guid id, bool isGetRelations)
         {
             var foundZone = await _unitOfWork.ZoneRepository.GetAsync(id, isGetRelations);
             if (foundZone == null)
@@ -121,7 +121,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateZone")]
-        public async Task<ActionResult<bool>> UpdateZone(int id, ZoneDto zoneDto)
+        public async Task<ActionResult<bool>> UpdateZone(Guid id, ZoneDto zoneDto)
         {
             var foundZone = await _unitOfWork.ZoneRepository.GetAsync(id, false);
             if (foundZone == null)
@@ -139,7 +139,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteZone")]
-        public async Task<ActionResult<bool>> DeleteZone(int id)
+        public async Task<ActionResult<bool>> DeleteZone(Guid id)
         {
             var foundZone = await _unitOfWork.ZoneRepository.GetAsync(id, false);
             if (foundZone == null)
@@ -184,7 +184,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetRack")]
-        public async Task<ActionResult<Rack>> GetRack(int id, bool isGetRelations)
+        public async Task<ActionResult<Rack>> GetRack(Guid id, bool isGetRelations)
         {
             var foundRack = await _unitOfWork.RackRepository.GetAsync(id, isGetRelations);
             if (foundRack == null)
@@ -197,7 +197,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateRack")]
-        public async Task<ActionResult<bool>> UpdateRack(int id, RackDto rackDto)
+        public async Task<ActionResult<bool>> UpdateRack(Guid id, RackDto rackDto)
         {
             var foundRack = await _unitOfWork.RackRepository.GetAsync(id, false);
             if (foundRack == null)
@@ -218,7 +218,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteRack")]
-        public async Task<ActionResult<bool>> DeleteRack(int id)
+        public async Task<ActionResult<bool>> DeleteRack(Guid id)
         {
             var foundRack = await _unitOfWork.RackRepository.GetAsync(id, false);
             if (foundRack == null)
@@ -331,7 +331,7 @@ namespace WMSBackend.Controllers
             }
 
             var foundStaff = await _unitOfWork.StaffRepository.GetAsync(
-                zoneStaffDto.StaffId,
+                zoneStaffDto.StaffId.ToString(),
                 false,
                 true,
                 false

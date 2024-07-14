@@ -52,7 +52,10 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetCustomerOrder")]
-        public async Task<ActionResult<CustomerOrder>> GetCustomerOrder(int id, bool isGetRelations)
+        public async Task<ActionResult<CustomerOrder>> GetCustomerOrder(
+            Guid id,
+            bool isGetRelations
+        )
         {
             var foundCustomerOrder = await _unitOfWork.CustomerOrderRepository.GetAsync(
                 id,
@@ -69,7 +72,7 @@ namespace WMSBackend.Controllers
         [HttpPut]
         [Route("UpdateCustomerOrder")]
         public async Task<ActionResult<bool>> UpdateCustomerOrder(
-            int id,
+            Guid id,
             CustomerOrderDto customerOrderDto
         )
         {
@@ -91,7 +94,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteCustomerOrder")]
-        public async Task<ActionResult<bool>> DeleteCustomerOrder(int id)
+        public async Task<ActionResult<bool>> DeleteCustomerOrder(Guid id)
         {
             var foundCustomerOrder = await _unitOfWork.CustomerOrderRepository.GetAsync(id, false);
             if (foundCustomerOrder == null)
@@ -143,7 +146,7 @@ namespace WMSBackend.Controllers
         [HttpGet]
         [Route("GetCustomerOrderDetail")]
         public async Task<ActionResult<CustomerOrderDetail>> GetCustomerOrderDetail(
-            int id,
+            Guid id,
             bool isGetRelations
         )
         {
@@ -162,7 +165,7 @@ namespace WMSBackend.Controllers
         [HttpPut]
         [Route("UpdateCustomerOrderDetail")]
         public async Task<ActionResult<bool>> UpdateCustomerOrderDetail(
-            int id,
+            Guid id,
             CustomerOrderDetailDto customerOrderDetailDto
         )
         {
@@ -188,7 +191,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteCustomerOrderDetail")]
-        public async Task<ActionResult<bool>> DeleteCustomerOrderDetail(int id)
+        public async Task<ActionResult<bool>> DeleteCustomerOrderDetail(Guid id)
         {
             var foundCustomerOrderDetail = await _unitOfWork.CustomerOrderDetailRepository.GetAsync(
                 id,
@@ -220,7 +223,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetAllBins")]
-        public async Task<ActionResult<List<Bin>>> GetAllBins(int binId, bool isGetRelations)
+        public async Task<ActionResult<List<Bin>>> GetAllBins(Guid binId, bool isGetRelations)
         {
             var bins = await _unitOfWork.BinRepository.FindAsync(
                 x => x.Id == binId,
@@ -232,7 +235,7 @@ namespace WMSBackend.Controllers
 
         [HttpGet]
         [Route("GetBin")]
-        public async Task<ActionResult<Bin>> GetBin(int id, bool isGetRelations)
+        public async Task<ActionResult<Bin>> GetBin(Guid id, bool isGetRelations)
         {
             var foundBin = await _unitOfWork.BinRepository.GetAsync(id, isGetRelations);
             if (foundBin == null)
@@ -245,7 +248,7 @@ namespace WMSBackend.Controllers
 
         [HttpPut]
         [Route("UpdateBin")]
-        public async Task<ActionResult<bool>> UpdateBin(int id, BinDto binDto)
+        public async Task<ActionResult<bool>> UpdateBin(Guid id, BinDto binDto)
         {
             var foundBin = await _unitOfWork.BinRepository.GetAsync(id, false);
             if (foundBin == null)
@@ -262,7 +265,7 @@ namespace WMSBackend.Controllers
 
         [HttpDelete]
         [Route("DeleteBin")]
-        public async Task<ActionResult<bool>> DeleteBin(int id)
+        public async Task<ActionResult<bool>> DeleteBin(Guid id)
         {
             var foundBin = await _unitOfWork.BinRepository.GetAsync(id, false);
             if (foundBin == null)

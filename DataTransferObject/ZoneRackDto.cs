@@ -2,8 +2,8 @@
 {
     public class ProductRackDto
     {
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
-        public int RackId { get; set; }
+        public Guid RackId { get; set; }
     }
 }

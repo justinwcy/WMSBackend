@@ -2,8 +2,8 @@
 {
     public class ZoneStaffDto
     {
-        public int ZoneId { get; set; }
+        public Guid ZoneId { get; set; }
 
-        public string StaffId { get; set; }
+        public Guid StaffId { get; set; }
     }
 }

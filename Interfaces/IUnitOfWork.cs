@@ -12,6 +12,9 @@
         IIncomingOrderRepository IncomingOrderRepository { get; }
         IInventoryRepository InventoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        IProductRackRepository ProductRackRepository { get; }
+        IProductShopRepository ProductShopRepository { get; }
+        IProductSkuRepository ProductSkuRepository { get; }
         IRackRepository RackRepository { get; }
         IRefundOrderProductRepository RefundOrderProductRepository { get; }
         IRefundOrderRepository RefundOrderRepository { get; }
@@ -21,6 +24,7 @@
         IVendorRepository VendorRepository { get; }
         IWarehouseRepository WarehouseRepository { get; }
         IZoneRepository ZoneRepository { get; }
+        IZoneStaffRepository ZoneStaffRepository { get; }
 
         Task<int> CommitAsync();
     }
